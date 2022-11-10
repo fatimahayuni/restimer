@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Timer</title>
+</head>
+<body>
+    <form>
+        <div>
+            <label for="agent_name">Agent Name:</label>
+            <input id="agent_name" name="agent_name" type="text" />
+            <label for="date">Date:</label>
+            <input id="date" name="date" type="text" />
+            <button id="btnGet">Get Times</button>
+        </div>
+        <div id="result">
+
+        </div>
+    </form>
+    <script type="text/javascript">
+        document.getElementById("btnGet").onclick = function(e) {
+            e.preventDefault();
+
+            agent = document.getElementById("agent_name").value;
+            date = document.getElementById("date").value;
+
+            result = document.getElementById("result");
+
+            fetch("/times?agent=" + agent + "&date=" + date)
+                .then(async r => {
+                    data = await r.text()
+                    ele = document.createElement("p");
+                    ele.innerText = data
+                    result.appendChild(ele);
+                })
+                .catch(e => {
+                    ele = document.createElement("p");
+                    ele.innerText = e
+                    result.appendChild(ele);
+                });
+        };
+    </script>
+</body>
+</html>

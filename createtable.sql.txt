@@ -1,0 +1,10 @@
+CREATE TABLE `restime`.`schedules` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `date` DATETIME NOT NULL,
+  `agent_name` VARCHAR(45) NOT NULL,
+  `start` DATETIME NOT NULL,
+  `first_break` DATETIME NOT NULL,
+  `meal` DATETIME NOT NULL,
+  `second_break` DATETIME NOT NULL,
+  `end` DATETIME NOT NULL,
+  PRIMARY KEY (`id`));
