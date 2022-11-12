@@ -33,9 +33,27 @@ def schedule():
 """This runs the GET TIMES button in AgentFetch.html"""
 @app.route("/times", methods=['GET'])
 def times():
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="password",
+        database="restime"
+    )
+    cursor = db.cursor()
+
     agent = request.args.get("agent")
     date = request.args.get("date")
-    return "Hello"
+
+    val = (agent, date)
+
+    cursor.execute("SELECT start, first_break, meal, second_break, end FROM schedules WHERE agent_name = %s AND date =%s", val)
+
+    result = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return result
 
 @app.route("/timer_test", methods=['GET'])
 def timer_test():

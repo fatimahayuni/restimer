@@ -15,6 +15,7 @@ def weekly_schedule(row_index):
     )
     cursor = db.cursor()
 
+
     sql = "INSERT INTO schedules (date, agent_name, start, first_break, meal, second_break, end) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
     for day in range(5):
@@ -60,5 +61,8 @@ def weekly_schedule(row_index):
             cursor.execute(sql, val)
 
             db.commit()
+
+    cursor.close()
+    db.close()
 
            
