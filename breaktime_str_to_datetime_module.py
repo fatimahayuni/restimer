@@ -12,5 +12,3 @@ def breaktime_str_to_datetime(date_string, breaktime_string):
     
     return full
     
-time = breaktime_str_to_datetime("1 Aug 22", "1:00 PM")
-time = breaktime_str_to_datetime("2 Aug 22", "4:00 PM")

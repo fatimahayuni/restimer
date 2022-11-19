@@ -13,29 +13,26 @@ def upload():
 """To save a file of csv data to pass to MySQL"""
 @app.route("/schedule", methods=['POST'])
 def schedule():
-    try:
-        uploaded_file = request.files['filename']
-        csvdata = uploaded_file.read()
+    uploaded_file = request.files['filename']
+    csvdata = uploaded_file.read()
 
-        string_csvdata = str(csvdata)
+    string_csvdata = str(csvdata)
 
-        list_csvdata = string_csvdata.split("\\r\\n")
+    list_csvdata = string_csvdata.split("\\r\\n")
 
-        for index in range(0,73):
-            split_listcsvdata = list_csvdata[index].split(",")
-            elements_csvdata.append(split_listcsvdata)
+    for index in range(0,73):
+        split_listcsvdata = list_csvdata[index].split(",")
+        elements_csvdata.append(split_listcsvdata)
 
 
-        weekly_schedule(3)
-        weekly_schedule(18)
-        weekly_schedule(32)
-        weekly_schedule(47)
-        weekly_schedule(61)
+    weekly_schedule(3)
+    weekly_schedule(18)
+    weekly_schedule(32)
+    weekly_schedule(47)
+    weekly_schedule(61)
 
-        return "Thanks for the file!"
-
-    except:
-        return "Ooopsss..something went wrong."
+    return "Thanks for the file!"
+    
 
 """This endpoint retrieves agent times from the database using the agent name and date sent from client."""
 @app.route("/times", methods=['GET'])
