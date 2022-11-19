@@ -29,9 +29,12 @@ def weekly_schedule(row_index):
             agent_name = elements_csvdata[row_index + agent][col_index]
             print(agent_name)
 
-            start_time_string = elements_csvdata[row_index + agent][col_index + 1]
+            try:
+                start_time_string = elements_csvdata[row_index + agent][col_index + 1]
+            except:
+                print("Bad data format found")
+
             start_time_formatted = breaktime_str_to_datetime(date_string, start_time_string)
-            
             first_break_string = elements_csvdata[row_index + agent][col_index + 2]
             first_break_formatted = breaktime_str_to_datetime(date_string, first_break_string)
             print(first_break_formatted)
