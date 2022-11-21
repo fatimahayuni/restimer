@@ -1,3 +1,4 @@
+import traceback
 from flask import Flask, render_template, request
 import mysql.connector
 from weekly_schedule_module import *
@@ -13,26 +14,34 @@ def upload():
 """To save a file of csv data to pass to MySQL"""
 @app.route("/schedule", methods=['POST'])
 def schedule():
-    uploaded_file = request.files['filename']
-    csvdata = uploaded_file.read()
+    try:
+        uploaded_file = request.files['filename']
+        csvdata = uploaded_file.read()
 
-    string_csvdata = str(csvdata)
+        string_csvdata = str(csvdata)
 
-    list_csvdata = string_csvdata.split("\\r\\n")
+        list_csvdata = string_csvdata.split("\\r\\n")
 
-    for index in range(0,73):
-        split_listcsvdata = list_csvdata[index].split(",")
-        elements_csvdata.append(split_listcsvdata)
+        for index in range(0,73):
+            split_listcsvdata = list_csvdata[index].split(",")
+            elements_csvdata.append(split_listcsvdata)
 
-
-    weekly_schedule(3)
-    weekly_schedule(18)
-    weekly_schedule(32)
-    weekly_schedule(47)
-    weekly_schedule(61)
-
-    return "Thanks for the file!"
-    
+        f = weekly_schedule(3)
+        g = weekly_schedule(18)
+        h = weekly_schedule(32)
+        i = weekly_schedule(47)
+        j = weekly_schedule(61)
+        return f
+        return g
+        
+    except Exception as e:
+        my_string = str(e)
+        print(my_string)
+        traceback.print_exc()
+        return my_string
+        
+    else:
+        return "Thanks for uploading a good file!"
 
 """This endpoint retrieves agent times from the database using the agent name and date sent from client."""
 @app.route("/times", methods=['GET'])
