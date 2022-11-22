@@ -31,9 +31,9 @@ def schedule():
         h = weekly_schedule(32)
         i = weekly_schedule(47)
         j = weekly_schedule(61)
-        return f
-        return g
-        
+        list_of_weekly_schedule_error_messages = [f, g, h, i, j]
+        return list_of_weekly_schedule_error_messages
+
     except Exception as e:
         my_string = str(e)
         print(my_string)

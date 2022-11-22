@@ -5,7 +5,7 @@ import mysql.connector
 
 elements_csvdata = []
 
-
+"""Data parsing is done here."""
 def weekly_schedule(row_index):
     db = mysql.connector.connect(
         host="localhost",
@@ -25,7 +25,7 @@ def weekly_schedule(row_index):
         except:
             cursor.close()
             db.close()
-            return "The program died here."
+            return "The program died here at the DATE cell."
 
 
         for agent in range(11):
