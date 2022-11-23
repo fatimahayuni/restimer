@@ -97,4 +97,6 @@ def weekly_schedule(row_index):
     cursor.close()
     db.close()
 
+    return "All good for this week."
+
         

@@ -31,6 +31,8 @@ def schedule():
         h = weekly_schedule(32)
         i = weekly_schedule(47)
         j = weekly_schedule(61)
+        if f is None and g is None and h is None and i is None and j is None:
+            return "Thanks for uploading a good file."
         list_of_weekly_schedule_error_messages = [f, g, h, i, j]
         return list_of_weekly_schedule_error_messages
 
@@ -38,10 +40,7 @@ def schedule():
         my_string = str(e)
         print(my_string)
         traceback.print_exc()
-        return my_string
         
-    else:
-        return "Thanks for uploading a good file!"
 
 """This endpoint retrieves agent times from the database using the agent name and date sent from client."""
 @app.route("/times", methods=['GET'])
