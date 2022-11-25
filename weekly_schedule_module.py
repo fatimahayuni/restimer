@@ -35,7 +35,7 @@ def weekly_schedule(row_index):
             try:
                 start_time_formatted = breaktime_str_to_datetime(date_string, start_time_string)
             except:
-                start_time_error_message = f"Bad data found in {row_index}{col_index} cell."
+                start_time_error_message = f"Bad data found in START cell: {[col_index + 1 ,row_index + agent]}."
                 cursor.close()
                 db.close()
                 return start_time_error_message
@@ -45,17 +45,17 @@ def weekly_schedule(row_index):
             try: 
                 first_break_formatted = breaktime_str_to_datetime(date_string, first_break_string)
             except:
-                first_break_error_message = "Bad data found in FIRST BREAK cell"
+                first_break_error_message = f"Bad data found in FIRST BREAK cell: {[col_index + 2 ,row_index + agent]}."
                 cursor.close()
                 db.close()
+                print(first_break_error_message)
                 return first_break_error_message
-
 
             meal_string = elements_csvdata[row_index + agent][col_index + 3]
             try:
                 meal_formatted = breaktime_str_to_datetime(date_string, meal_string)
             except:
-                meal_time_error_message = "Bad data found in MEAL TIME cell"
+                meal_time_error_message = f"Bad data found in MEAL TIME cell: {[col_index + 3 ,row_index + agent]}."
                 cursor.close()
                 db.close()
                 return meal_time_error_message
@@ -64,7 +64,7 @@ def weekly_schedule(row_index):
             try:
                 second_break_formatted = breaktime_str_to_datetime(date_string, second_break_string)
             except:
-                second_break_error_message = "Bad data found in SECOND BREAK cell"
+                second_break_error_message = f"Bad data found in SECOND BREAK cell: {[col_index + 4 ,row_index + agent]}."
                 cursor.close()
                 db.close()
                 return second_break_error_message
@@ -73,7 +73,7 @@ def weekly_schedule(row_index):
             try:
                 end_time_formatted = breaktime_str_to_datetime(date_string, end_time_string)
             except:
-                end_time_error_message = "Bad data found in END TIME cell"
+                end_time_error_message = f"Bad data found in END TIME cell: {[col_index + 5 ,row_index + agent]}."
                 cursor.close()
                 db.close()
                 return end_time_error_message
@@ -97,6 +97,6 @@ def weekly_schedule(row_index):
     cursor.close()
     db.close()
 
-    return "All good for this week."
+    return "Week OK."
 
         

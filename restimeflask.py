@@ -31,7 +31,8 @@ def schedule():
         h = weekly_schedule(32)
         i = weekly_schedule(47)
         j = weekly_schedule(61)
-        if f is None and g is None and h is None and i is None and j is None:
+        
+        if f == "Week OK." and g == "Week OK." and h == "Week OK." and i == "Week OK." and j == "Week OK.":
             return "Thanks for uploading a good file."
         list_of_weekly_schedule_error_messages = [f, g, h, i, j]
         return list_of_weekly_schedule_error_messages
