@@ -47,21 +47,24 @@ def weekly_schedule(row_index):
             except:
                 "Split the numeric coord [9, 10] to 2 parts: [9] and [10]"
                 numeric_first_break_error_coord = [col_index + 2 ,row_index + agent]
-                first_part = numeric_first_break_error_coord[0]
-                print(first_part) #print(first_part) = [9]. We want "J". From list to string.
+                first_part = numeric_first_break_error_coord[0] # print(first_part) = [9]. We want "J". From list to string.
                 second_part = numeric_first_break_error_coord[1] #print(second_part = [10]. We want 11. So have to add 1.
 
                 "Take first_part of the numeric coord and convert it to alphabets"
                 alphabets = ["A", "B", "C", "D", "E", "F" ,"G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE"]
-                for alphabet in alphabets:
-                    print(alphabet) #terminal output: tuple of (0, 'A')
+                list_of_tuples = []
+                for alphabet in enumerate(alphabets):
+                    list_of_tuples.append(alphabet)
+                alphanum_dict = dict((x,y) for x, y in list_of_tuples) 
+                alpha_coord = alphanum_dict[first_part]
+                print(alphanum_dict[first_part])
             
+                "Take second_part of the numeric_coord and + 1"
                 num_coord = second_part
-                alphanum_first_break_error_coord = [alpha_coord, num_coord]
+                alphanum_first_break_error_coord = [alpha_coord, num_coord + 1]
                 first_break_error_message = f"Bad data found in FIRST BREAK cell: {alphanum_first_break_error_coord}."
                 cursor.close()
                 db.close()
-                print(first_break_error_message)
                 return first_break_error_message
 
             meal_string = elements_csvdata[row_index + agent][col_index + 3]
