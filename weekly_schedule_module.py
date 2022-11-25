@@ -45,7 +45,20 @@ def weekly_schedule(row_index):
             try: 
                 first_break_formatted = breaktime_str_to_datetime(date_string, first_break_string)
             except:
-                first_break_error_message = f"Bad data found in FIRST BREAK cell: {[col_index + 2 ,row_index + agent]}."
+                "Split the numeric coord [9, 10] to 2 parts: [9] and [10]"
+                numeric_first_break_error_coord = [col_index + 2 ,row_index + agent]
+                first_part = numeric_first_break_error_coord[0]
+                print(first_part) #print(first_part) = [9]. We want "J". From list to string.
+                second_part = numeric_first_break_error_coord[1] #print(second_part = [10]. We want 11. So have to add 1.
+
+                "Take first_part of the numeric coord and convert it to alphabets"
+                alphabets = ["A", "B", "C", "D", "E", "F" ,"G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE"]
+                for alphabet in alphabets:
+                    print(alphabet) #terminal output: tuple of (0, 'A')
+            
+                num_coord = second_part
+                alphanum_first_break_error_coord = [alpha_coord, num_coord]
+                first_break_error_message = f"Bad data found in FIRST BREAK cell: {alphanum_first_break_error_coord}."
                 cursor.close()
                 db.close()
                 print(first_break_error_message)
