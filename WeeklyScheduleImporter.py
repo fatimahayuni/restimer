@@ -2,6 +2,7 @@ from datetime import *
 from breaktime_str_to_datetime_module import *
 import mysql.connector
 
+
 class WeeklyScheduleImporter:
     # data = list object containing the csv data uploaded from browser.
     def __init__(self, data):

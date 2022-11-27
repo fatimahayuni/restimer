@@ -1,8 +1,8 @@
 import traceback
 from flask import Flask, render_template, request
 import mysql.connector
-from weekly_schedule_module import *
 import datetime
+from WeeklyScheduleImporter import *
 
 app = Flask(__name__)
 
@@ -21,16 +21,18 @@ def schedule():
         string_csvdata = str(csvdata)
 
         list_csvdata = string_csvdata.split("\\r\\n")
-
+        elements_csvdata = []
         for index in range(0,73):
             split_listcsvdata = list_csvdata[index].split(",")
             elements_csvdata.append(split_listcsvdata)
 
-        f = weekly_schedule(3)
-        g = weekly_schedule(18)
-        h = weekly_schedule(32)
-        i = weekly_schedule(47)
-        j = weekly_schedule(61)
+        # Creating an instance of WeeklyScheduleImporter class and storing a reference to it in the importer variable.
+        importer = WeeklyScheduleImporter(elements_csvdata)
+        f = importer.weekly_schedule(3)
+        g = importer.weekly_schedule(18)
+        h = importer.weekly_schedule(32)
+        i = importer.weekly_schedule(47)
+        j = importer.weekly_schedule(61)
         
         if f == "Week OK." and g == "Week OK." and h == "Week OK." and i == "Week OK." and j == "Week OK.":
             return "Thanks for uploading a good file."
