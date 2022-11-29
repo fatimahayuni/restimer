@@ -26,16 +26,17 @@ def schedule():
             split_listcsvdata = list_csvdata[index].split(",")
             elements_csvdata.append(split_listcsvdata)
 
-        f = weekly_schedule(3)
-        g = weekly_schedule(18)
-        h = weekly_schedule(32)
-        i = weekly_schedule(47)
-        j = weekly_schedule(61)
+        w1 = weekly_schedule(3)
+        w2 = weekly_schedule(18)
+        w3 = weekly_schedule(32)
+        w4 = weekly_schedule(47)
+        w5 = weekly_schedule(61)
         
-        if f == "Week OK." and g == "Week OK." and h == "Week OK." and i == "Week OK." and j == "Week OK.":
+        if w1 == "Week OK." and w2 == "Week OK." and w3 == "Week OK." and w4 == "Week OK." and w5 == "Week OK.":
             return "Thanks for uploading a good file."
-        list_of_weekly_schedule_error_messages = [f, g, h, i, j]
-        return list_of_weekly_schedule_error_messages
+        a = w1 + "\n" + w2 + "\n" + w3 + "\n" + w4 + "\n" + w5
+        return a
+        
 
     except Exception as e:
         my_string = str(e)
@@ -87,6 +88,7 @@ def times():
     db.close()
     return unix_all
 
+
 """Endpoint to return AgentFetch.html"""
 @app.route("/timer_test", methods=['GET'])
 def timer_test():
@@ -94,4 +96,5 @@ def timer_test():
 
 
 app.run(host='0.0.0.0', port=8080)
+
 

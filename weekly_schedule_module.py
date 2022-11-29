@@ -26,11 +26,19 @@ def weekly_schedule(row_index):
             cursor.close()
             db.close()
             return "The program died here at the DATE cell."
+        # else:
+        #     week_ok = f"Week {} OK."
 
 
         for agent in range(11):
+            # AGENT NAME
             agent_name = elements_csvdata[row_index + agent][col_index]
 
+
+
+
+
+            # START TIME
             start_time_string = elements_csvdata[row_index + agent][col_index + 1]
             try:
                 start_time_formatted = breaktime_str_to_datetime(date_string, start_time_string)
@@ -41,32 +49,37 @@ def weekly_schedule(row_index):
                 return start_time_error_message
             
 
+
+
+
+            # FIRST BREAK
             first_break_string = elements_csvdata[row_index + agent][col_index + 2]
             try: 
                 first_break_formatted = breaktime_str_to_datetime(date_string, first_break_string)
             except:
                 "Split the numeric coord [9, 10] to 2 parts: [9] and [10]"
-                numeric_first_break_error_coord = [col_index + 2 ,row_index + agent]
-                first_part = numeric_first_break_error_coord[0] # print(first_part) = [9]. We want "J". From list to string.
-                second_part = numeric_first_break_error_coord[1] #print(second_part = [10]. We want 11. So have to add 1.
+                first_part = col_index + 2
+                second_part = row_index + agent
 
                 "Take first_part of the numeric coord and convert it to alphabets"
                 alphabets = ["A", "B", "C", "D", "E", "F" ,"G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE"]
-                list_of_tuples = []
-                for alphabet in enumerate(alphabets):
-                    list_of_tuples.append(alphabet)
-                alphanum_dict = dict((x,y) for x, y in list_of_tuples) 
-                alpha_coord = alphanum_dict[first_part]
-                print(alphanum_dict[first_part])
+                alpha_coord = alphabets[first_part]
             
                 "Take second_part of the numeric_coord and + 1"
                 num_coord = second_part
                 alphanum_first_break_error_coord = [alpha_coord, num_coord + 1]
-                first_break_error_message = f"Bad data found in FIRST BREAK cell: {alphanum_first_break_error_coord}."
+                alphanum_first_break_error_coord_str = ""
+                for ele in alphanum_first_break_error_coord:
+                    alphanum_first_break_error_coord_str += str(ele) + ""
+                first_break_error_message = f"Bad data found in FIRST BREAK cell: {alphanum_first_break_error_coord_str}."
                 cursor.close()
                 db.close()
                 return first_break_error_message
 
+
+
+
+            # MEAL TIME
             meal_string = elements_csvdata[row_index + agent][col_index + 3]
             try:
                 meal_formatted = breaktime_str_to_datetime(date_string, meal_string)
@@ -76,6 +89,11 @@ def weekly_schedule(row_index):
                 db.close()
                 return meal_time_error_message
 
+
+
+
+
+            # SECOND BREAK
             second_break_string = elements_csvdata[row_index + agent][col_index + 4]
             try:
                 second_break_formatted = breaktime_str_to_datetime(date_string, second_break_string)
@@ -85,6 +103,11 @@ def weekly_schedule(row_index):
                 db.close()
                 return second_break_error_message
 
+
+
+
+
+            # END TIME
             end_time_string = elements_csvdata[row_index + agent][col_index + 5]
             try:
                 end_time_formatted = breaktime_str_to_datetime(date_string, end_time_string)
@@ -94,6 +117,8 @@ def weekly_schedule(row_index):
                 db.close()
                 return end_time_error_message
         
+
+
 
             val = (
                 date_formatted,
