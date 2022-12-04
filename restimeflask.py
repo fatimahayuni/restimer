@@ -26,15 +26,28 @@ def schedule():
             split_listcsvdata = list_csvdata[index].split(",")
             elements_csvdata.append(split_listcsvdata)
 
-        w1 = weekly_schedule(3)
-        w2 = weekly_schedule(18)
-        w3 = weekly_schedule(32)
-        w4 = weekly_schedule(47)
-        w5 = weekly_schedule(61)
+        db = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="password",
+            database="restime"
+            )
+        cursor = db.cursor()
+
+        w1 = weekly_schedule(3, cursor)
+        w2 = weekly_schedule(18, cursor)
+        w3 = weekly_schedule(32, cursor)
+        w4 = weekly_schedule(47, cursor)
+        w5 = weekly_schedule(61, cursor)
         
         if w1 == "Week OK." and w2 == "Week OK." and w3 == "Week OK." and w4 == "Week OK." and w5 == "Week OK.":
+            db.commit()
+            cursor.close()
+            db.close()
             return "Thanks for uploading a good file."
         a = w1 + "\n" + w2 + "\n" + w3 + "\n" + w4 + "\n" + w5
+        cursor.close()
+        db.close()
         return a
         
 
